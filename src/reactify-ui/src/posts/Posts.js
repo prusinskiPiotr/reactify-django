@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import 'whatwg-fetch'
 import cookie from 'react-cookies'
 
+import PostInline from './PostInline'
 
 class Posts extends Component {
   loadPosts(){
@@ -62,7 +63,10 @@ class Posts extends Component {
 
   render() {
     return (
+      <div>
         <h1>Hello World</h1>
+        <PostInline title='Test Title'/>
+      </div>
     );
   }
 }
