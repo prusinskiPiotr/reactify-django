@@ -6,7 +6,8 @@ import PostInline from './PostInline'
 
 class Posts extends Component {
     state = {
-        posts: []
+        posts: [],
+        postsListClass: "card",
     }
     loadPosts(){
         const endpoint = '/api/posts/'
@@ -23,6 +24,7 @@ class Posts extends Component {
             return response.json()
         }).then(function(responseData){
             console.log(responseData)
+            this !== thisComp
             thisComp.setState({
                 posts: responseData
             })
@@ -34,6 +36,7 @@ class Posts extends Component {
     CreatePost(){
         const endpoint = '/api/posts/'
         const csrfToken = cookie.load('csrftoken')
+        let thisComp = this
         let data = {
             "slug": "",
             "title": "",
@@ -66,19 +69,21 @@ class Posts extends Component {
 
     componentDidMount(){
         this.setState({
-            posts: []
+            posts: [],
+            postsListClass: "card",
         })
         this.loadPosts()
     }
 
     render() {
         const {posts} = this.state
+        const postsListClass = this.state
         return (
         <div>
             <h1>Hello World</h1>
             {posts.length > 0 ? posts.map((postItem, index)=>{
             return (
-                <PostInline post={postItem} />
+                <PostInline post={postItem} elClass='card' />
             )
             }) : <p>No Posts Found</p>}
         </div>
